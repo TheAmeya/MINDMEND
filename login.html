@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Support - Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #b3e5fc;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #b3e5fc;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid #b3e5fc;
+        }
+
+        input[type="submit"] {
+            background-color: #00796b;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #004d40;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #b3e5fc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile responsiveness */
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome Back</h2>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required>
+
+            <input type="submit" value="Login">
+            <div class="message">
+                New here? <a href="register.html">Register now</a>.
+            </div>
+        </form>
+        <div id="loginMessage" style="color: red;"></div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').onsubmit = function(event) {
+            event.preventDefault();
+            
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+
+            // Simulate an AJAX call for login (this would call a PHP file in a real scenario)
+            fetch('login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: email=${email}&password=${password}
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result === 'success') {
+                    window.location.href = 'profile.php';  // Redirect to profile page
+                } else {
+                    document.getElementById('loginMessage').innerHTML = 'Login failed! Please try again.';
+                }
+            });
+        };
+    </script>
+</body>
+</html>
